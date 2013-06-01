@@ -6,26 +6,27 @@
 //  Copyright (c) 2013 Hackathon. All rights reserved.
 //
 
-#import <MapKit/MapKit.h>
 #import "JLViewController.h"
 #import "JLService.h"
 
 @interface JLViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *addressField;
 @property (weak, nonatomic) IBOutlet MKMapView *mainMap;
-@property BOOL crimeDrawn;
-
+@property (nonatomic, retain) NSArray *crimeOverlays;
+@property BOOL crimeDisplayed;
 @end
 
+@interface JLViewController (action)
+- (IBAction)toggleCrimeData:(id)sender;
+
+@end
 @interface JLViewController (protocol) <MKMapViewDelegate>
 @end
 
 @interface JLViewController (drawing)
 - (void)drawCrimeInformation;
-- (void)squareForCenterAt:(CLLocationCoordinate2D)center;
-- (void)drawCoordinates:(CLLocationCoordinate2D *)drawingCoordinates count:(NSInteger)count forType:(NSInteger)aType onMap:(MKMapView *)mapView;
+- (MKPolygon *)squareForCenterAt:(CLLocationCoordinate2D)center;
 @end
-
 
 @implementation JLViewController
 
@@ -41,11 +42,32 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (NSArray *)crimeOverlays {
+    if (!_crimeOverlays) {
+        NSMutableArray *overlays = [NSMutableArray array];
+        NSArray *crimeArray = [[JLService sharedService] crimeDataForYear:@"2012"];
+        NSInteger count = 5000;
+        NSInteger i = 0;
+        for (NSDictionary *aCrime in crimeArray) {
+            if (i > count) {
+                break;
+            }
+            CLLocationDegrees x = [aCrime[@"X"] doubleValue];
+            CLLocationDegrees y = [aCrime[@"Y"] doubleValue];
+            
+            CLLocationCoordinate2D center = CLLocationCoordinate2DMake(y, x);
+            [overlays addObject:[self squareForCenterAt:center]];
+            i++;
+        }
+        _crimeOverlays = overlays;
+    }
+    return _crimeOverlays;
+}
+
 @end
 
 @implementation JLViewController (protocol)
 - (void)mapViewDidFinishLoadingMap:(MKMapView *)mapView {
-    [self drawCrimeInformation];
 }
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
@@ -69,13 +91,8 @@
 @end
 
 @implementation JLViewController (drawing)
-- (void)drawCoordinates:(CLLocationCoordinate2D *)drawingCoordinates count:(NSInteger)count forType:(NSInteger)aType onMap:(MKMapView *)mapView {
-    //TODO: type determines color
-    MKPolygon *polygon = [MKPolygon polygonWithCoordinates:drawingCoordinates count:count];
-    [mapView addOverlay:polygon];
-}
 
-- (void)squareForCenterAt:(CLLocationCoordinate2D)center {
+- (MKPolygon *)squareForCenterAt:(CLLocationCoordinate2D)center {
     CLLocationDegrees offset = 0.0008;
     CLLocationCoordinate2D coords[5] = {
         CLLocationCoordinate2DMake(center.latitude - offset, center.longitude - offset),
@@ -85,28 +102,26 @@
         CLLocationCoordinate2DMake(center.latitude - offset, center.longitude - offset)
     };
     
-    [self drawCoordinates:coords count:5 forType:0 onMap:[self mainMap]];
-    return;
+    return [MKPolygon polygonWithCoordinates:coords count:5];
 }
 
 - (void)drawCrimeInformation {
-    if (![self crimeDrawn]) {
-        NSArray *crimeArray = [[JLService sharedService] crimeDataForYear:@"2012"];
-        NSInteger count = 5000;
-        NSInteger i = 0 ;
-        for (NSDictionary *aCrime in crimeArray) {
-            if (i > count) {
-                break;
-            }
-            CLLocationDegrees x = [aCrime[@"X"] doubleValue];
-            CLLocationDegrees y = [aCrime[@"Y"] doubleValue];
-            
-            CLLocationCoordinate2D center = CLLocationCoordinate2DMake(y, x);
-            [self squareForCenterAt:center];
-            i++;
-        }
-        [self setCrimeDrawn:YES];
-    }
+    [[self mainMap] addOverlays:[self crimeOverlays]];
 }
 
+@end
+
+@implementation JLViewController (action)
+
+
+- (IBAction)toggleCrimeData:(id)sender {
+    if ([self crimeDisplayed]) {
+        [[self mainMap] removeOverlays:[self crimeOverlays]];
+        [self setCrimeDisplayed:NO];
+    } else {
+        [[self mainMap] addOverlays:[self crimeOverlays]];
+        [self setCrimeDisplayed:YES];
+    }
+    
+}
 @end

@@ -8,6 +8,10 @@
 
 #import "JLService.h"
 
+@interface JLService ()
+@property (nonatomic, retain) NSArray *crimeData;
+@end
+
 @implementation JLService
 + (id)sharedService {
     static JLService *shared;
@@ -20,14 +24,23 @@
 }
 
 - (NSArray *)crimeDataForYear:(NSString *)yearString {
-    NSData *data = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:yearString ofType:@"json"]];
-    NSError *readError = nil;
-    NSArray *anArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&readError];
-    if (readError) {
-        NSLog(@"dang it: %@", readError);
-    } else {
-        NSLog(@"total entry: %d", [anArray count]);
+    if (!_crimeData) {
+        NSData *data = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:yearString ofType:@"json"]];
+        NSError *readError = nil;
+        NSArray *anArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&readError];
+        if (readError) {
+            NSLog(@"dang it: %@", readError);
+        } else {
+            NSLog(@"total entry: %d", [anArray count]);
+        }
+        _crimeData = anArray;
     }
-    return anArray;
+    return [self crimeData];
 }
+
+- (NSArray *)neighborhoodsInRegion:(MKCoordinateRegion)region {
+    //not looking at region
+    return [NSArray array];
+}
+
 @end
