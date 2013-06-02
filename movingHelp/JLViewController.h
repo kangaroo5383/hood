@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface JLViewController : UIViewController
-
+@property (nonatomic, retain) NSArray *displayData;
 @end

@@ -12,4 +12,7 @@
 + (id)sharedService;
 
 - (NSArray *)crimeDataForYear:(NSString *)yearString;
+- (NSArray *)neighborhoodsInRegion:(MKCoordinateRegion)region;
+- (NSArray *)rentData;
+- (NSArray *)schoolData;
 @end

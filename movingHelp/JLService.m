@@ -39,8 +39,26 @@
 }
 
 - (NSArray *)neighborhoodsInRegion:(MKCoordinateRegion)region {
-    //not looking at region
-    return [NSArray array];
+    NSArray *result = nil;
+    NSData *data = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ca_neighborhoods" ofType:@"json"]];
+    NSError *readError = nil;
+    NSDictionary *featuresDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&readError];
+    if (readError) {
+        NSLog(@"not working!: %@", readError);
+    } else {
+        result = featuresDictionary[@"features"];
+    }
+    return result;
+}
+
+- (NSArray *)rentData {
+    NSArray *results = nil;
+    return results;
+}
+
+- (NSArray *)schoolData {
+    NSArray *results = nil;
+    return results;
 }
 
 @end
