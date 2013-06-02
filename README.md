@@ -1,4 +1,5 @@
 iOS App from 2 days of Hackathon
+- Be warn of bad design.  Not representative of typical engineering quality :P
 
 TODO
 ====

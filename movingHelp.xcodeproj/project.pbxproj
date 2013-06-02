@@ -28,7 +28,6 @@
 		9526171F175A856D006724C9 /* 2013.json in Resources */ = {isa = PBXBuildFile; fileRef = 9526171B175A856D006724C9 /* 2013.json */; };
 		95261728175ABF07006724C9 /* ca_neighborhoods.json in Resources */ = {isa = PBXBuildFile; fileRef = 95261727175ABF07006724C9 /* ca_neighborhoods.json */; };
 		9526172E175AE070006724C9 /* JLDataSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9526172D175AE070006724C9 /* JLDataSelectionViewController.m */; };
-		95261731175AE80D006724C9 /* JLToggleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95261730175AE80D006724C9 /* JLToggleCell.m */; };
 		9526173A175BA794006724C9 /* school.json in Resources */ = {isa = PBXBuildFile; fileRef = 95261739175BA794006724C9 /* school.json */; };
 		9526173D175BA8E0006724C9 /* meetup.json in Resources */ = {isa = PBXBuildFile; fileRef = 9526173C175BA8E0006724C9 /* meetup.json */; };
 		95261741175BB743006724C9 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9526173F175BB743006724C9 /* icon.png */; };
@@ -69,8 +68,6 @@
 		95261727175ABF07006724C9 /* ca_neighborhoods.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ca_neighborhoods.json; sourceTree = "<group>"; };
 		9526172C175AE070006724C9 /* JLDataSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLDataSelectionViewController.h; sourceTree = "<group>"; };
 		9526172D175AE070006724C9 /* JLDataSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLDataSelectionViewController.m; sourceTree = "<group>"; };
-		9526172F175AE80D006724C9 /* JLToggleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLToggleCell.h; sourceTree = "<group>"; };
-		95261730175AE80D006724C9 /* JLToggleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLToggleCell.m; sourceTree = "<group>"; };
 		95261739175BA794006724C9 /* school.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = school.json; sourceTree = "<group>"; };
 		9526173C175BA8E0006724C9 /* meetup.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = meetup.json; sourceTree = "<group>"; };
 		9526173F175BB743006724C9 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
@@ -143,8 +140,6 @@
 				952616EE175A719E006724C9 /* Supporting Files */,
 				9526172C175AE070006724C9 /* JLDataSelectionViewController.h */,
 				9526172D175AE070006724C9 /* JLDataSelectionViewController.m */,
-				9526172F175AE80D006724C9 /* JLToggleCell.h */,
-				95261730175AE80D006724C9 /* JLToggleCell.m */,
 				9526174D175BCA18006724C9 /* JLMeeupOverlayView.h */,
 				9526174E175BCA18006724C9 /* JLMeeupOverlayView.m */,
 			);
@@ -312,7 +307,6 @@
 				95261707175A719E006724C9 /* JLRootViewController.m in Sources */,
 				95261713175A7E1F006724C9 /* JLService.m in Sources */,
 				9526172E175AE070006724C9 /* JLDataSelectionViewController.m in Sources */,
-				95261731175AE80D006724C9 /* JLToggleCell.m in Sources */,
 				9526174F175BCA18006724C9 /* JLMeeupOverlayView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
