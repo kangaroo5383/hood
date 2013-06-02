@@ -56,9 +56,19 @@
     return results;
 }
 
+- (NSArray *)meetupData {
+    NSData *data = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"meetup" ofType:@"json"]];;
+    NSError *readError = nil;
+    NSArray *meetups = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&readError];
+    return meetups;
+}
+
 - (NSArray *)schoolData {
-    NSArray *results = nil;
-    return results;
+    NSData *data = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"school" ofType:@"json"]];
+    NSError *readError = nil;
+    NSArray *schoolDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&readError];
+    
+    return schoolDictionary;
 }
 
 @end

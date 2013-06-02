@@ -15,4 +15,5 @@
 - (NSArray *)neighborhoodsInRegion:(MKCoordinateRegion)region;
 - (NSArray *)rentData;
 - (NSArray *)schoolData;
+- (NSArray *)meetupData;
 @end

@@ -21,8 +21,8 @@
 @property (nonatomic, retain) NSArray *neighborhoodOverlays;
 @property BOOL neighborhoodDisplayed;
 
-//TODO
 @property (nonatomic, retain) NSArray *schoolOverlays;
+@property (nonatomic, retain) NSDictionary *schoolRatingsDictionary;
 
 //TODO
 @property (nonatomic, retain) NSArray *meetupOverlays;
@@ -92,7 +92,7 @@
             [[self mainMap] addOverlays:[self rentOverlays]];
         } else {
             [[self mainMap] removeOverlays:[self rentOverlays]];
-        }
+        }        
     }
 }
 
@@ -169,9 +169,60 @@
 
 - (NSArray *)schoolOverlays {
     if (!_schoolOverlays) {
+        NSArray *dataArray = [[JLService sharedService] schoolData];
         
+        NSMutableArray *overlays = [NSMutableArray array];
+        NSInteger limit = 1000;
+        NSInteger i = 0;
+        NSMutableDictionary *schoolRatingsDictionary = [NSMutableDictionary dictionary];
+        for (NSDictionary *aSchool in dataArray) {
+            if (limit > 0) {    //-1 means everything goes
+                if (i > limit) {
+                    break;
+                }
+            }
+            CLLocationDegrees longitude = [aSchool[@"Longitude"] doubleValue];
+            CLLocationDegrees latitude = [aSchool[@"Latitude"] doubleValue];
+            NSInteger rating = [aSchool[@"API12B"] integerValue];
+            
+            CLLocationCoordinate2D center = CLLocationCoordinate2DMake(latitude, longitude);
+            MKPolygon *aPolygon = [self squareForCenterAt:center];
+            [schoolRatingsDictionary setObject:[NSNumber numberWithInteger:rating] forKey:[NSNumber numberWithInteger:[aPolygon hash]]];
+            [overlays addObject:aPolygon];
+            i++;
+        }
+        [self setSchoolRatingsDictionary:[NSDictionary dictionaryWithDictionary:schoolRatingsDictionary]];
+        _schoolOverlays = [NSArray arrayWithArray:overlays];
     }
     return _schoolOverlays;
+}
+
+- (NSArray *)meetupOverlays {
+    if (!_meetupOverlays) {
+        NSArray *meetups = [[JLService sharedService] meetupData];
+        NSMutableArray *overlays = [NSMutableArray array];
+
+        NSInteger limit = 1000;
+        NSInteger i = 0;
+
+        for (NSDictionary *aMeetup in meetups) {
+            if (limit > 0) {    //-1 means everything goes
+                if (i > limit) {
+                    break;
+                }
+                i++;
+            }
+            CLLocationDegrees longitude = [aMeetup[@"lon"] doubleValue];
+            CLLocationDegrees latitude = [aMeetup[@"lat"] doubleValue];
+
+            CLLocationCoordinate2D center = CLLocationCoordinate2DMake(latitude, longitude);
+            MKPolygon *aPolygon = [self squareForCenterAt:center];
+            [overlays addObject:aPolygon];
+        }
+        _meetupOverlays = [NSArray arrayWithArray:overlays];
+
+    }
+    return _meetupOverlays;
 }
 
 @end
@@ -188,6 +239,10 @@
     MKCoordinateRegion defaultRegion = MKCoordinateRegionMake([[mapView userLocation] coordinate], MKCoordinateSpanMake(40, 40));
     [mapView setRegion:defaultRegion];
 }
+- (NSInteger)schoolRatingFor:(id)overlay {
+    return [[[self schoolRatingsDictionary] objectForKey:[NSNumber numberWithInteger:[overlay hash]]] integerValue];
+}
+
 -(MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay{
 	if([overlay isKindOfClass:[MKPolygon class]]){
 		MKPolygonView *view = [[MKPolygonView alloc] initWithOverlay:overlay];
@@ -198,6 +253,17 @@
         if ([[self neighborhoodOverlays] containsObject:overlay]) {
             [view setStrokeColor:[UIColor greenColor]];
             [view setFillColor:[[UIColor blueColor] colorWithAlphaComponent:0.5]];
+        }
+        if ([[self schoolOverlays] containsObject:overlay]) {
+            NSInteger rating = [self schoolRatingFor:overlay];
+            CGFloat alpha = 0.0f;
+            alpha += [[NSNumber numberWithInteger:rating] floatValue]  / 900.0f;
+            [view setFillColor:[[UIColor orangeColor] colorWithAlphaComponent:alpha]];
+//            [view setStrokeColor:[UIColor orangeColor]];
+            NSLog(@"school rating:%d and alpha: %f", rating, alpha);
+        }
+        if ([[self meetupOverlays] containsObject:overlay]) {
+            [view setFillColor:[UIColor brownColor]];
         }
         return view;
 	}
