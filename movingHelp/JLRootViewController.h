@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JLViewController : UIViewController
+@interface JLRootViewController : UIViewController
 @property (nonatomic, retain) NSArray *displayData;
 @end

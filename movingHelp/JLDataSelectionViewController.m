@@ -7,7 +7,7 @@
 //
 
 #import "JLDataSelectionViewController.h"
-#import "JLViewController.h"
+#import "JLRootViewController.h"
 
 @interface JLDataSelectionViewController ()
 @property (nonatomic, retain) NSArray *choices;
@@ -25,7 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setChoices:@[@"crime", @"neighborhood", @"school", @"meetup", @"rent"]];
+    [self setChoices:@[@"crime", @"neighborhood", @"school", @"meetup"]];
     [self setSelected:[NSMutableArray array]];
 }
 
@@ -34,7 +34,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    NSArray *selected = [(JLViewController *)[self presentingViewController] displayData];
+    NSArray *selected = [(JLRootViewController *)[self presentingViewController] displayData];
     [self setSelected:[NSMutableArray arrayWithArray:selected]];
 }
 
@@ -75,7 +75,7 @@
 @implementation JLDataSelectionViewController (action)
 
 - (IBAction)update:(id)sender {
-    [(JLViewController *)[self presentingViewController] setDisplayData:[NSArray arrayWithArray:[self selected]]];
+    [(JLRootViewController *)[self presentingViewController] setDisplayData:[NSArray arrayWithArray:[self selected]]];
     [self dismissViewControllerAnimated:YES completion:^{
         
     }];

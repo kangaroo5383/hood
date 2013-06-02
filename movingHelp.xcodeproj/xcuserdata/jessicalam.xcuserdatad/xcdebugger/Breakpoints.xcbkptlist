@@ -7,13 +7,13 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "movingHelp/JLViewController.m"
-         timestampString = "391886537.000777"
+         filePath = "movingHelp/JLService.m"
+         timestampString = "391819600.572954"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "307"
-         endingLineNumber = "307"
-         landmarkName = "-toggleCrimeData:"
+         startingLineNumber = "36"
+         endingLineNumber = "36"
+         landmarkName = "-crimeDataForYear:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -27,6 +27,58 @@
          startingLineNumber = "40"
          endingLineNumber = "40"
          landmarkName = "-toggle:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "movingHelp/JLTypedPolygon.m"
+         timestampString = "391838162.246294"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "27"
+         endingLineNumber = "27"
+         landmarkName = "-coordinate"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "movingHelp/JLTypedPolygon.m"
+         timestampString = "391838163.111846"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "31"
+         endingLineNumber = "31"
+         landmarkName = "-intersectsMapRect:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "movingHelp/JLTypedPolygon.m"
+         timestampString = "391838163.913298"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "35"
+         endingLineNumber = "35"
+         landmarkName = "-boundingMapRect"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "movingHelp/JLViewController.m"
+         timestampString = "391891590.50132"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "365"
+         endingLineNumber = "365"
+         landmarkName = "-lookupAddress:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

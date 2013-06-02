@@ -18,7 +18,7 @@
 		952616FE175A719E006724C9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 952616FD175A719E006724C9 /* Default-568h@2x.png */; };
 		95261701175A719E006724C9 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 952616FF175A719E006724C9 /* MainStoryboard_iPhone.storyboard */; };
 		95261704175A719E006724C9 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95261702175A719E006724C9 /* MainStoryboard_iPad.storyboard */; };
-		95261707175A719E006724C9 /* JLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95261706175A719E006724C9 /* JLViewController.m */; };
+		95261707175A719E006724C9 /* JLRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95261706175A719E006724C9 /* JLRootViewController.m */; };
 		9526170E175A72CE006724C9 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9526170D175A72CE006724C9 /* MapKit.framework */; };
 		95261710175A7D0A006724C9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9526170F175A7D0A006724C9 /* CoreLocation.framework */; };
 		95261713175A7E1F006724C9 /* JLService.m in Sources */ = {isa = PBXBuildFile; fileRef = 95261712175A7E1F006724C9 /* JLService.m */; };
@@ -33,10 +33,15 @@
 		9526173D175BA8E0006724C9 /* meetup.json in Resources */ = {isa = PBXBuildFile; fileRef = 9526173C175BA8E0006724C9 /* meetup.json */; };
 		95261741175BB743006724C9 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9526173F175BB743006724C9 /* icon.png */; };
 		95261742175BB743006724C9 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 95261740175BB743006724C9 /* icon@2x.png */; };
+		95261745175BB8AC006724C9 /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 95261743175BB8AC006724C9 /* setting.png */; };
+		95261746175BB8AC006724C9 /* setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 95261744175BB8AC006724C9 /* setting@2x.png */; };
+		9526174B175BBEB6006724C9 /* meetupIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 95261749175BBEB6006724C9 /* meetupIcon.png */; };
+		9526174C175BBEB6006724C9 /* meetupIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9526174A175BBEB6006724C9 /* meetupIcon@2x.png */; };
+		9526174F175BCA18006724C9 /* JLMeeupOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9526174E175BCA18006724C9 /* JLMeeupOverlayView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		952616E4175A719E006724C9 /* movingHelp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = movingHelp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		952616E4175A719E006724C9 /* movingHelp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = movingHelp.app; path = hood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		952616E7175A719E006724C9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		952616E9175A719E006724C9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		952616EB175A719E006724C9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -51,8 +56,8 @@
 		952616FD175A719E006724C9 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		95261700175A719E006724C9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		95261703175A719E006724C9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		95261705175A719E006724C9 /* JLViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JLViewController.h; sourceTree = "<group>"; };
-		95261706175A719E006724C9 /* JLViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JLViewController.m; sourceTree = "<group>"; };
+		95261705175A719E006724C9 /* JLRootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JLRootViewController.h; sourceTree = "<group>"; };
+		95261706175A719E006724C9 /* JLRootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JLRootViewController.m; sourceTree = "<group>"; };
 		9526170D175A72CE006724C9 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		9526170F175A7D0A006724C9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		95261711175A7E1F006724C9 /* JLService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLService.h; sourceTree = "<group>"; };
@@ -70,6 +75,12 @@
 		9526173C175BA8E0006724C9 /* meetup.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = meetup.json; sourceTree = "<group>"; };
 		9526173F175BB743006724C9 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		95261740175BB743006724C9 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		95261743175BB8AC006724C9 /* setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting.png; sourceTree = "<group>"; };
+		95261744175BB8AC006724C9 /* setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting@2x.png"; sourceTree = "<group>"; };
+		95261749175BBEB6006724C9 /* meetupIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = meetupIcon.png; sourceTree = "<group>"; };
+		9526174A175BBEB6006724C9 /* meetupIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "meetupIcon@2x.png"; sourceTree = "<group>"; };
+		9526174D175BCA18006724C9 /* JLMeeupOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLMeeupOverlayView.h; sourceTree = "<group>"; };
+		9526174E175BCA18006724C9 /* JLMeeupOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLMeeupOverlayView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,8 +136,8 @@
 				952616F7175A719E006724C9 /* JLAppDelegate.m */,
 				952616FF175A719E006724C9 /* MainStoryboard_iPhone.storyboard */,
 				95261702175A719E006724C9 /* MainStoryboard_iPad.storyboard */,
-				95261705175A719E006724C9 /* JLViewController.h */,
-				95261706175A719E006724C9 /* JLViewController.m */,
+				95261705175A719E006724C9 /* JLRootViewController.h */,
+				95261706175A719E006724C9 /* JLRootViewController.m */,
 				95261711175A7E1F006724C9 /* JLService.h */,
 				95261712175A7E1F006724C9 /* JLService.m */,
 				952616EE175A719E006724C9 /* Supporting Files */,
@@ -134,6 +145,8 @@
 				9526172D175AE070006724C9 /* JLDataSelectionViewController.m */,
 				9526172F175AE80D006724C9 /* JLToggleCell.h */,
 				95261730175AE80D006724C9 /* JLToggleCell.m */,
+				9526174D175BCA18006724C9 /* JLMeeupOverlayView.h */,
+				9526174E175BCA18006724C9 /* JLMeeupOverlayView.m */,
 			);
 			path = movingHelp;
 			sourceTree = "<group>";
@@ -205,6 +218,10 @@
 			children = (
 				9526173F175BB743006724C9 /* icon.png */,
 				95261740175BB743006724C9 /* icon@2x.png */,
+				95261743175BB8AC006724C9 /* setting.png */,
+				95261744175BB8AC006724C9 /* setting@2x.png */,
+				95261749175BBEB6006724C9 /* meetupIcon.png */,
+				9526174A175BBEB6006724C9 /* meetupIcon@2x.png */,
 			);
 			path = icons;
 			sourceTree = "<group>";
@@ -212,9 +229,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		952616E3175A719E006724C9 /* movingHelp */ = {
+		952616E3175A719E006724C9 /* hood */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9526170A175A719E006724C9 /* Build configuration list for PBXNativeTarget "movingHelp" */;
+			buildConfigurationList = 9526170A175A719E006724C9 /* Build configuration list for PBXNativeTarget "hood" */;
 			buildPhases = (
 				952616E0175A719E006724C9 /* Sources */,
 				952616E1175A719E006724C9 /* Frameworks */,
@@ -224,7 +241,7 @@
 			);
 			dependencies = (
 			);
-			name = movingHelp;
+			name = hood;
 			productName = movingHelp;
 			productReference = 952616E4175A719E006724C9 /* movingHelp.app */;
 			productType = "com.apple.product-type.application";
@@ -251,7 +268,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				952616E3175A719E006724C9 /* movingHelp */,
+				952616E3175A719E006724C9 /* hood */,
 			);
 		};
 /* End PBXProject section */
@@ -276,6 +293,10 @@
 				9526173D175BA8E0006724C9 /* meetup.json in Resources */,
 				95261741175BB743006724C9 /* icon.png in Resources */,
 				95261742175BB743006724C9 /* icon@2x.png in Resources */,
+				95261745175BB8AC006724C9 /* setting.png in Resources */,
+				95261746175BB8AC006724C9 /* setting@2x.png in Resources */,
+				9526174B175BBEB6006724C9 /* meetupIcon.png in Resources */,
+				9526174C175BBEB6006724C9 /* meetupIcon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,10 +309,11 @@
 			files = (
 				952616F4175A719E006724C9 /* main.m in Sources */,
 				952616F8175A719E006724C9 /* JLAppDelegate.m in Sources */,
-				95261707175A719E006724C9 /* JLViewController.m in Sources */,
+				95261707175A719E006724C9 /* JLRootViewController.m in Sources */,
 				95261713175A7E1F006724C9 /* JLService.m in Sources */,
 				9526172E175AE070006724C9 /* JLDataSelectionViewController.m in Sources */,
 				95261731175AE80D006724C9 /* JLToggleCell.m in Sources */,
+				9526174F175BCA18006724C9 /* JLMeeupOverlayView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,7 +439,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9526170A175A719E006724C9 /* Build configuration list for PBXNativeTarget "movingHelp" */ = {
+		9526170A175A719E006724C9 /* Build configuration list for PBXNativeTarget "hood" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9526170B175A719E006724C9 /* Debug */,

@@ -6,11 +6,28 @@
 //  Copyright (c) 2013 Hackathon. All rights reserved.
 //
 
-#import "JLViewController.h"
+#import "JLRootViewController.h"
 #import "JLService.h"
 #import "JLDataSelectionViewController.h"
+#import "JLAppDelegate.h"
+#import "JLMeeupOverlayView.h"
 
-@interface JLViewController ()
+@interface AddressAnnotation:NSObject<MKAnnotation>
+@property CLLocationCoordinate2D coordinate;
+- (id)initWithCoordinate:(CLLocationCoordinate2D)location;
+@end
+
+@implementation AddressAnnotation
+- (id)initWithCoordinate:(CLLocationCoordinate2D)location {
+    self = [super init];
+    if (self) {
+        [self setCoordinate:location];
+    }
+    return self;
+}
+@end
+
+@interface JLRootViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *addressField;
 @property (weak, nonatomic) IBOutlet MKMapView *mainMap;
 @property (nonatomic, retain) NSArray *crimeOverlays;
@@ -26,26 +43,32 @@
 
 //TODO
 @property (nonatomic, retain) NSArray *meetupOverlays;
+
+
+//Default pin drop
+@property CLLocationCoordinate2D defaultLocation;
 @end
 
-@interface JLViewController (action)
+@interface JLRootViewController (action)
 - (IBAction)toggleCrimeData:(id)sender;
 - (IBAction)goToAddress:(id)sender;
 - (IBAction)toggleNeighborhoods:(id)sender;
 - (IBAction)displaySelectionMenu:(id)sender;
+- (IBAction)lookupAddress:(id)sender;
 
 @end
-@interface JLViewController (protocol) <MKMapViewDelegate>
+@interface JLRootViewController (protocol) <MKMapViewDelegate>
 @end
 
-@interface JLViewController (drawing)
+@interface JLRootViewController (drawing)
 - (void)drawCrimeInformation;
 - (MKPolygon *)squareForCenterAt:(CLLocationCoordinate2D)center;
 @end
 
-@implementation JLViewController
+@implementation JLRootViewController
 
 - (void)viewDidLoad {
+    [self setDefaultLocation:CLLocationCoordinate2DMake(37.774277,-122.435957)];
     [super viewDidLoad];
     //San Francsico
     MKCoordinateRegion defaultRegion = MKCoordinateRegionMake(CLLocationCoordinate2DMake(37.7645381907803,  -122.440239784725), MKCoordinateSpanMake(0.136888010555715, 0.134679137168746));
@@ -202,7 +225,7 @@
         NSArray *meetups = [[JLService sharedService] meetupData];
         NSMutableArray *overlays = [NSMutableArray array];
 
-        NSInteger limit = 1000;
+        NSInteger limit = 2000;
         NSInteger i = 0;
 
         for (NSDictionary *aMeetup in meetups) {
@@ -227,7 +250,7 @@
 
 @end
 
-@implementation JLViewController (protocol)
+@implementation JLRootViewController (protocol)
 - (void)mapViewDidFinishLoadingMap:(MKMapView *)mapView {
 }
 
@@ -245,25 +268,37 @@
 
 -(MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay{
 	if([overlay isKindOfClass:[MKPolygon class]]){
-		MKPolygonView *view = [[MKPolygonView alloc] initWithOverlay:overlay];
-		view.lineWidth=1;
+        MKPolygonView *view = nil;
+        UIColor *crimeColor = [UIColor colorWithRed:178.0f/255.0f green:15.0f/255.0f blue:77.0f/255.0f alpha:1.0];
+        UIColor *neighborhoodColor = nil;
         if ([[self crimeOverlays] containsObject:overlay]) {
-            view.fillColor=[[UIColor redColor] colorWithAlphaComponent:0.1];
+            view = [[MKPolygonView alloc] initWithOverlay:overlay];
+            view.lineWidth=1;
+            view.fillColor=[crimeColor colorWithAlphaComponent:0.1];
         }
         if ([[self neighborhoodOverlays] containsObject:overlay]) {
-            [view setStrokeColor:[UIColor greenColor]];
-            [view setFillColor:[[UIColor blueColor] colorWithAlphaComponent:0.5]];
+            view = [[MKPolygonView alloc] initWithOverlay:overlay];
+            view.lineWidth=1;
+            [view setStrokeColor:[UIColor blueColor]];
+            [view setFillColor:[[UIColor colorWithRed:75.0f/255.0f green:122.0f/255.0f blue:255.0f/255.0f alpha:1.0] colorWithAlphaComponent:0.3]];
         }
         if ([[self schoolOverlays] containsObject:overlay]) {
+            view = [[MKPolygonView alloc] initWithOverlay:overlay];
             NSInteger rating = [self schoolRatingFor:overlay];
-            CGFloat alpha = 0.0f;
-            alpha += [[NSNumber numberWithInteger:rating] floatValue]  / 900.0f;
-            [view setFillColor:[[UIColor orangeColor] colorWithAlphaComponent:alpha]];
-//            [view setStrokeColor:[UIColor orangeColor]];
-            NSLog(@"school rating:%d and alpha: %f", rating, alpha);
+            CGFloat alpha = ([[NSNumber numberWithInteger:rating] floatValue] - 700.0f);
+            UIColor *schoolColor = [UIColor colorWithRed:alpha green:0 blue:1 alpha:1];
+            if (alpha < 80) {
+                schoolColor = [UIColor colorWithWhite:1.0f alpha:1];
+            } else if (alpha < 150) {
+                schoolColor = [UIColor colorWithWhite:0.5 alpha:1];
+            } else if (alpha > 150) {
+                schoolColor = [UIColor colorWithWhite:0 alpha:1.0f];
+            }
+            [view setFillColor:schoolColor];
         }
         if ([[self meetupOverlays] containsObject:overlay]) {
-            [view setFillColor:[UIColor brownColor]];
+            view = [[JLMeeupOverlayView alloc] initWithOverlay:overlay];
+            [view setFillColor:[UIColor colorWithRed:0.0f/255.0f green:170.0f/255.0f blue:0.0f/255.0f alpha:1.0]];            
         }
         return view;
 	}
@@ -271,7 +306,7 @@
 }
 @end
 
-@implementation JLViewController (drawing)
+@implementation JLRootViewController (drawing)
 
 - (MKPolygon *)squareForCenterAt:(CLLocationCoordinate2D)center {
     CLLocationDegrees offset = 0.0008;
@@ -292,7 +327,7 @@
 
 @end
 
-@implementation JLViewController (action)
+@implementation JLRootViewController (action)
 
 
 - (IBAction)toggleCrimeData:(id)sender {
@@ -323,5 +358,11 @@
 
 - (IBAction)displaySelectionMenu:(id)sender {
 
+}
+
+- (IBAction)lookupAddress:(id)sender {
+    [[self addressField] resignFirstResponder];
+    [[self mainMap] addAnnotation:[[AddressAnnotation alloc] initWithCoordinate:[self defaultLocation]]];
+    [[self mainMap] setRegion:MKCoordinateRegionMake([self defaultLocation], MKCoordinateSpanMake(0.0681059967961914, 0.0549316389075614)) animated:YES];
 }
 @end
