@@ -192,9 +192,13 @@
 	if([overlay isKindOfClass:[MKPolygon class]]){
 		MKPolygonView *view = [[MKPolygonView alloc] initWithOverlay:overlay];
 		view.lineWidth=1;
-//		view.fillColor=[[UIColor redColor] colorWithAlphaComponent:0.1];
-        [view setStrokeColor:[UIColor greenColor]];
-        [view setFillColor:[[UIColor blueColor] colorWithAlphaComponent:0.5]];
+        if ([[self crimeOverlays] containsObject:overlay]) {
+            view.fillColor=[[UIColor redColor] colorWithAlphaComponent:0.1];
+        }
+        if ([[self neighborhoodOverlays] containsObject:overlay]) {
+            [view setStrokeColor:[UIColor greenColor]];
+            [view setFillColor:[[UIColor blueColor] colorWithAlphaComponent:0.5]];
+        }
         return view;
 	}
 	return nil;
